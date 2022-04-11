@@ -8,10 +8,10 @@
   <a href="https://github.com/RizFurrs"><img title="Author" src="https://img.shields.io/badge/Author-RizFurr-blue.svg?style=for-the-badge&logo=github" /></a>
 </p>
 
-## INSTALL Dependents
+## ```INSTALL Dependents```
 > npm install rizfurr-api
 
-## UNINSTALL Dependents
+## ``UNINSTALL Dependents```
 > npm uninstall rizfurr-api
 
 ## ```EXAMPLE```
