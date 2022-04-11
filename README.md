@@ -11,7 +11,7 @@
 ## ```INSTALL Dependents```
 > npm install rizfurr-api
 
-## ``UNINSTALL Dependents```
+## ```UNINSTALL Dependents```
 > npm uninstall rizfurr-api
 
 ## ```EXAMPLE```
