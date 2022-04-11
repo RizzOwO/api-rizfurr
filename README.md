@@ -5,14 +5,14 @@
 
 
 <p align="center">
-  <a href="https://github.com/RizFurrs"><img title="Author" src="https://img.shields.io/badge/Author-RizFurr-red.svg?style=for-the-badge&logo=github" /></a>
+  <a href="https://github.com/RizFurrs"><img title="Author" src="https://img.shields.io/badge/Author-RizFurr-blue.svg?style=for-the-badge&logo=github" /></a>
 </p>
 
 ## INSTALL Dependents
 > npm install rizfurr-api
 
 ## UNINSTALL Dependents
-> npm uinstall rizfurr-api
+> npm uninstall rizfurr-api
 
 ## ```EXAMPLE```
 *•Lyric*
