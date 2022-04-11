@@ -27,7 +27,8 @@ jobs:
 
           registry-url: https://registry.npmjs.org/
       - run: npm install --save err
-      - run: npm config set registry https://skimdb.npmjs.com/registry
+      - run: npm config set registry https://github.com/npm/npm-registry-couchapp
+
       - run: npm publish --access=public
 
 
