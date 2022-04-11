@@ -15,7 +15,7 @@
 > npm uninstall rizfurr-api
 
 ## ```EXAMPLE```
-*•Lyric*
+*• Lyric*
 ```
 const rizz = require('rizfurr-api');
 
