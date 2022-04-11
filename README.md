@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://uploader.caliph.my.id/file/35OEkjf6QT.jpg" alt="RizFurr" width="175" />
+<img src="https://uploader.caliph.my.id/file/35OEkjf6QT.jpg" alt="RizFurr" width="172" />
 
 </div>
 
