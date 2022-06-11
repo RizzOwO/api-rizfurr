@@ -11,7 +11,6 @@ module.exports = {
     fbdown,
     ttdownloader,
     soundcloud,
-    soundcloud2, 
     ytMp4,
 	  ytMp3,
 	  ytMp4,
