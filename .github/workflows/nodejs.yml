@@ -26,11 +26,7 @@ jobs:
           node-version: 12
 
           registry-url: https://registry.npmjs.org/
-      - run: npm install --save err
-      - run: npm config set registry https://github.com/npm/npm-registry-couchapp
-
+          
       - run: npm publish --access=public
-
-
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_SECRET}}
