@@ -17,8 +17,10 @@ const {
 	igstalk,
 	twitter,
 	fbdown,
-	youtube,
-	ttdownloader
+	ttdownloader, 
+	ytMp4,
+	ytMp3,
+	ytPlay
 } = require('./modules/function')
 
 module.exports.otakudesu = otakudesu
@@ -41,6 +43,7 @@ module.exports.twitter = twitter
 module.exports.fbdown = fbdown
 module.exports.youtube = youtube
 module.exports.ttdownloader = ttdownloader
-
-
+module.exports.ytMp4 = ytMp4
+module.exports.ytMp3 = ytMp3
+module.exports.ytPlay = ytPlay
 
