@@ -1,6 +1,8 @@
-const cheerio = require("cheerio")
-const axios = require("axios")
-const qs = require("qs")
+const cheerio = require("cheerio");
+const ytdl = require('ytdl-core');
+const yts = require('yt-search');
+const axios = require("axios");
+const qs = require("qs");
 
 function otakudesu(judul){
 	return new Promise(async(resolve, reject) => {
@@ -11,7 +13,7 @@ function otakudesu(judul){
 	let limk = $('#venkonten > div > div.venser > div > div > ul > li:nth-child(1) > h2 > a').attr('href')
 	axios.get(limk).then(({ data }) => {
 	const $$ = cheerio.load(data)
-	result.message = 'sekha'
+	result.message = 'RizFurr'
 	result.img = $$('#venkonten > div.venser > div.fotoanime').find('img').attr('src')
 	$$('#venkonten > div.venser > div.fotoanime > div.infozin > div').each(function(a, b) {
 		result.judul = $$(b).find('p:nth-child(1)').text().replace('Judul: ','')
@@ -58,7 +60,7 @@ function covid(){
 					const nglo = $(d).find('div:nth-child(5) > strong').text()
 					const up = $(d).find('div.pt-4.text-color-grey.text-1').text().trim()
 				const result = {
-					message: 'sekha',
+					message: 'RizFurr',
 					indo : {
 						positif_indo: pindo,
 						meninggal_indo: mindo,
@@ -179,7 +181,7 @@ function tebakgambar() {
     const img = link2 + $(b).find('img').attr('data-src')
     const jwb = $(b).find('img').attr('alt')
     result.push({
-    	message: 'sekha',
+    	message: 'RizFurr',
     	image: img,
     	jawaban: jwb
     })
@@ -582,86 +584,6 @@ function fbdown(link){
 	})
 }
 
-function youtube(link){
-	return new Promise((resolve, reject) => {
-		const ytIdRegex = /(?:http(?:s|):\/\/|)(?:(?:www\.|)youtube(?:\-nocookie|)\.com\/(?:watch\?.*(?:|\&)v=|embed\/|v\/)|youtu\.be\/)([-_0-9A-Za-z]{11})/
-		if (ytIdRegex.test(link)) {
-		let url =  ytIdRegex.exec(link)
-		let config = {
-			'url': 'https://www.youtube.be/' + url,
-			'q_auto': 0,
-			'ajax': 1
-		}
-		let headerss = 	{
-			"sec-ch-ua": '" Not;A Brand";v="99", "Google Chrome";v="91", "Chromium";v="91"',
-			"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
-			"Cookie": 'PHPSESSID=6jo2ggb63g5mjvgj45f612ogt7; _ga=GA1.2.405896420.1625200423; _gid=GA1.2.2135261581.1625200423; _PN_SBSCRBR_FALLBACK_DENIED=1625200785624; MarketGidStorage={"0":{},"C702514":{"page":5,"time":1625200846733}}'
-		}
-	axios('https://www.y2mate.com/mates/en68/analyze/ajax',{
-			method: 'POST',
-			data: new URLSearchParams(Object.entries(config)),
-			headers: headerss
-		})
-	.then(({ data }) => {
-		const $ = cheerio.load(data.result)
-		let img = $('div.thumbnail.cover > a > img').attr('src');
-		let title = $('div.thumbnail.cover > div > b').text();
-		let size = $('#mp4 > table > tbody > tr:nth-child(3) > td:nth-child(2)').text()
-		let size_mp3 = $('#audio > table > tbody > tr:nth-child(1) > td:nth-child(2)').text()
-		let id = /var k__id = "(.*?)"/.exec(data.result)[1]
-		let configs = {
-    type: 'youtube',
-    _id: id,
-    v_id: url[1],
-    ajax: '1',
-    token: '',
-    ftype: 'mp4',
-    fquality: 480
-  }
-	axios('https://www.y2mate.com/mates/en68/convert',{
-		method: 'POST',
-		data: new URLSearchParams(Object.entries(configs)),
-		headers: headerss 
-	})
-	.then(({data}) => {
-		const $ = cheerio.load(data.result)
-		let link = $('div > a').attr('href')
-	let configss = {
-    type: 'youtube',
-    _id: id,
-    v_id: url[1],
-    ajax: '1',
-    token: '',
-    ftype: 'mp3',
-    fquality: 128
-  }
-	axios('https://www.y2mate.com/mates/en68/convert',{
-		method: 'POST',
-		data: new URLSearchParams(Object.entries(configss)),
-		headers: headerss 
-	})
-	.then(({ data }) => {
-		const $ = cheerio.load(data.result)
-		let audio = $('div > a').attr('href')
-		resolve({
-			id: url[1],
-			title: title,
-			size: size,
-			quality: '480p',
-			thumb: img,
-			link: link,
-			size_mp3: size_mp3,
-			mp3: audio
-		})
-
-		})
-			})
-		})
-	.catch(reject)
-	}else reject('link invalid')
-	})
-}
-
 function ttdownloader(url){
 	return new Promise(async(resolve, reject) => {
 		axios.get('https://ttdownloader.com/',{
@@ -691,7 +613,7 @@ function ttdownloader(url){
 		.then(({ data }) => {
 			const $ = cheerio.load(data)
 			resolve({
-				message: 'sekha',
+				message: 'RizFurr',
 				nowm: $('div:nth-child(2) > div.download > a').attr('href'),
 				wm: $('div:nth-child(3) > div.download > a').attr('href'),
 				audio: $('div:nth-child(4) > div.download > a').attr('href')
@@ -701,6 +623,118 @@ function ttdownloader(url){
 	.catch(reject)
 	})
 }
+
+function bytesToSize(bytes) {
+    return new Promise((resolve, reject) => {
+        const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+        if (bytes === 0) return 'n/a';
+        const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)), 10);
+        if (i === 0) resolve(`${bytes} ${sizes[i]}`);
+        resolve(`${(bytes / (1024 ** i)).toFixed(1)} ${sizes[i]}`);
+    });
+  };
+
+function ytMp4(url) {
+    return new Promise(async(resolve, reject) => {
+        ytdl.getInfo(url).then(async(getUrl) => {
+            let result = [];
+            for(let i = 0; i < getUrl.formats.length; i++) {
+                let item = getUrl.formats[i];
+                if (item.container == 'mp4' && item.hasVideo == true && item.hasAudio == true) {
+                    let { qualityLabel, contentLength } = item;
+                    let bytes = await bytesToSize(contentLength);
+                    result[i] = {
+                        video: item.url,
+                        quality: qualityLabel,
+                        size: bytes
+                    };
+                };
+            };
+            let resultFix = result.filter(x => x.video != undefined && x.size != undefined && x.quality != undefined) 
+            let tiny = await axios.get(`https://tinyurl.com/api-create.php?url=${resultFix[0].video}`);
+            let tinyUrl = tiny.data;
+            let title = getUrl.videoDetails.title;
+            let desc = getUrl.videoDetails.description;
+            let views = getUrl.videoDetails.viewCount;
+            let likes = getUrl.videoDetails.likes;
+            let dislike = getUrl.videoDetails.dislikes;
+            let channel = getUrl.videoDetails.ownerChannelName;
+            let uploadDate = getUrl.videoDetails.uploadDate;
+            let thumb = getUrl.player_response.microformat.playerMicroformatRenderer.thumbnail.thumbnails[0].url;
+            resolve({
+                title,
+                result: tinyUrl,
+                quality: resultFix[0].quality,
+                size: resultFix[0].size,
+                thumb,
+                views,
+                likes,
+                dislike,
+                channel,
+                uploadDate,
+                desc
+            });
+        }).catch(reject);
+    });
+};
+
+function ytMp3(url) {
+    return new Promise((resolve, reject) => {
+        ytdl.getInfo(url).then(async(getUrl) => {
+            let result = [];
+            for(let i = 0; i < getUrl.formats.length; i++) {
+                let item = getUrl.formats[i];
+                if (item.mimeType == 'audio/webm; codecs=\"opus\"') {
+                    let { contentLength } = item;
+                    let bytes = await bytesToSize(contentLength);
+                    result[i] = {
+                        audio: item.url,
+                        size: bytes
+                    };
+                };
+            };
+            let resultFix = result.filter(x => x.audio != undefined && x.size != undefined) 
+            let tiny = await axios.get(`https://tinyurl.com/api-create.php?url=${resultFix[0].audio}`);
+            let tinyUrl = tiny.data;
+            let title = getUrl.videoDetails.title;
+            let desc = getUrl.videoDetails.description;
+            let views = getUrl.videoDetails.viewCount;
+            let likes = getUrl.videoDetails.likes;
+            let dislike = getUrl.videoDetails.dislikes;
+            let channel = getUrl.videoDetails.ownerChannelName;
+            let uploadDate = getUrl.videoDetails.uploadDate;
+            let thumb = getUrl.player_response.microformat.playerMicroformatRenderer.thumbnail.thumbnails[0].url;
+            resolve({
+                title,
+                result: tinyUrl,
+                size: resultFix[0].size,
+                thumb,
+                views,
+                likes,
+                dislike,
+                channel,
+                uploadDate,
+                desc
+            });
+        }).catch(reject);
+    });
+}
+
+function ytPlay(query) {
+    return new Promise((resolve, reject) => {
+        yts(query).then(async(getData) => {
+            let result = getData.videos.slice( 0, 5 );
+            let url = [];
+            for (let i = 0; i < result.length; i++) {
+                url.push(result[i].url);
+            }
+            let random = url[Math.floor(Math.random() * url.length)];
+            let getAudio = await ytMp3(random);
+            resolve(getAudio);
+        }).catch(reject);
+    });
+};
+
 
 module.exports.otakudesu = otakudesu
 module.exports.covid = covid
@@ -720,5 +754,7 @@ module.exports.igstory = igstory
 module.exports.igstalk = igstalk
 module.exports.twitter = twitter
 module.exports.fbdown = fbdown
-module.exports.youtube = youtube
 module.exports.ttdownloader = ttdownloader
+module.exports.ytMp4 = ytMp4
+module.exports.ytMp3 = ytMp3
+module.exports.ytPlay = ytPlay
