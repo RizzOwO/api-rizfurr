@@ -1,9 +1,8 @@
-const { version, author } = require("./package.json");
-const downloader = require('./modules/downloader')
+downloader = require('./modules/downloader')
 
 module.exports = {
-  version,
-  author,
+  version: "0.0.5",
+  author: "RizFurr",
   downloader: {
     igdl,
     igstory,
