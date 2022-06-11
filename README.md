@@ -1,18 +1,18 @@
 <div align="center">
-<img src="https://uploader.caliph.my.id/file/35OEkjf6QT.jpg" alt="RizFurr" width="172" />
+<img src="https://i.ibb.co/s3Lv9fN/thumb.png" alt="RizFurr" width="172" />
 
 </div>
 
 
 <p align="center">
-  <a href="https://github.com/RizFurrs"><img title="Author" src="https://img.shields.io/badge/Author-RizFurr-blue.svg?style=for-the-badge&logo=github" /></a>
+  <a href="https://github.com/RizzOwO"><img title="Author" src="https://img.shields.io/badge/Author-RizFurr-blue.svg?style=for-the-badge&logo=github" /></a>
 </p>
 
 ## ```INSTALL Dependents```
-> npm install rizfurr-api
+> npm install api-rizfurr
 
 ## ```UNINSTALL Dependents```
-> npm uninstall rizfurr-api
+> npm uninstall api-rizfurr
 
 ## ```EXAMPLE```
 *• Lyric*
