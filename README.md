@@ -16,7 +16,7 @@
 
 ## ```EXAMPLE```
 *• Lyric*
-```
+```js
 const rizz = require('rizfurr-api');
 
 rizz.lyric('You Broke Me First')
@@ -25,7 +25,7 @@ rizz.lyric('You Broke Me First')
 });
 ```
 *• Pinterest*
-```
+```js
 const rizz = require('rizfurr-api');
 
 rizz.pinterest(q)
